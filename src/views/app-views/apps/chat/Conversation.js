@@ -135,7 +135,7 @@ const Conversation = () => {
           {message && (message.map((elm, i) => (
             <div
               key={`msg-${id}-${i}`}
-              className={`msg ${elm.msgType === 'date' ? 'datetime' : ''} ${elm.sender.id != userId ? 'msg-recipient' : 'msg-sent'}`}
+              className={`msg ${elm.msgType === 'date' ? 'datetime' : ''} ${elm.sender.id != userId && elm.sender !=userId ? 'msg-recipient' : 'msg-sent'}`}
             >
               {
                 elm.avatar ?
