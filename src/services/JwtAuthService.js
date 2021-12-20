@@ -1,6 +1,6 @@
 const JwtAuthService = {}
 JwtAuthService.login = function (data) {
-	return fetch('http://localhost:4000/api/auth/login',{
+	return fetch('https://bb-assignment-react-01.herokuapp.com/api/auth/login',{
 		method:"POST",
 		headers: {
 			'Content-Type': 'application/json'
