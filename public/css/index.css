@@ -56,7 +56,7 @@ span.ant-avatar.ant-avatar-circle.ant-avatar-image.avatar-news {
 .img-new {
     width: 100%;
     border-radius: 10px;
-    position: absolute;
+    position: relative;
 }
 
 .upload-post {
