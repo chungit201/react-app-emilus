@@ -47,7 +47,7 @@ const Conversation = () => {
   const token = JSON.parse(sessionStorage.getItem('access_token'));
   const [socket, setSocket] = useState();
   useEffect(() => {
-    const newSocket = io.connect('https://bb-assignment-react-01.herokuapp.com', {
+    const newSocket = io.connect('https://server-my-app-0012.herokuapp.com', {
       auth: { token: token },
       transports: ['websocket'],
     });
