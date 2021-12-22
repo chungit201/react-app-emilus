@@ -22,15 +22,16 @@
     color: #3e79f7
 }
 
-button.sc-gKclnd.lcUbOd.rec.rec-dot.rec.rec-dot_active {
+.sc-iCfMLu.fphOhl.rec.rec-pagination {
     display: none;
 }
-
-.avatar-news {
+span.ant-avatar.ant-avatar-circle.ant-avatar-image.avatar-news {
+    position: absolute;
     border:3px solid #045bfd;
-    bottom:90px;
-    right: 40px;
+    top:10px;
+    left: 10px
 }
+
 .mg-auto {
     margin: auto;
 }
