@@ -24,51 +24,26 @@ import {
   ShoppingCartOutlined,
   BookOutlined,
   FileUnknownOutlined,
-  ProfileOutlined
+  ProfileOutlined,
+  HomeOutlined
 } from '@ant-design/icons';
 import { APP_PREFIX_PATH, AUTH_PREFIX_PATH } from 'configs/AppConfig'
 
-const dashBoardNavTree = [{
-  key: 'dashboards',
-  path: `${APP_PREFIX_PATH}/dashboards`,
-  title: 'sidenav.dashboard',
-  icon: DashboardOutlined,
-  breadcrumb: false,
-  submenu: [
-    {
-      key: 'dashboards-default',
-      path: `${APP_PREFIX_PATH}/dashboards/default`,
-      title: 'sidenav.dashboard.default',
-      icon: DashboardOutlined,
-      breadcrumb: false,
-      submenu: []
-    },
-    {
-      key: 'dashboards-analytic',
-      path: `${APP_PREFIX_PATH}/dashboards/analytic`,
-      title: 'sidenav.dashboard.analytic',
-      icon: DotChartOutlined,
-      breadcrumb: false,
-      submenu: []
-    },
-    {
-      key: 'dashboards-sales',
-      path: `${APP_PREFIX_PATH}/dashboards/sales`,
-      title: 'sidenav.dashboard.sales',
-      icon: FundOutlined,
-      breadcrumb: false,
-      submenu: []
-    }
-  ]
-}]
-
 const appsNavTree = [{
-  key: 'apps',
-  path: `${APP_PREFIX_PATH}/apps`,
+  key: 'home',
+  path: `${APP_PREFIX_PATH}`,
   title: 'sidenav.apps',
   icon: AppstoreOutlined,
   breadcrumb: false,
   submenu: [
+    {
+      key: 'apps-home',
+      path: `${APP_PREFIX_PATH}/apps/home`,
+      title: 'home',
+      icon: HomeOutlined,
+      breadcrumb: false,
+      submenu: []
+    },
     {
       key: 'apps-mail',
       path: `${APP_PREFIX_PATH}/apps/mail/inbox`,
@@ -155,7 +130,7 @@ const appsNavTree = [{
 }]
 
 const navigationConfig = [
-  ...dashBoardNavTree,
+  // ...dashBoardNavTree,
   ...appsNavTree,
 ]
 

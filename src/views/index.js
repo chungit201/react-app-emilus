@@ -31,6 +31,7 @@ function RouteInterceptor({ children, isAuthenticated, ...rest }) {
 }
 
 export const Views = (props) => {
+  
   const token = JSON.parse(sessionStorage.getItem('access_token'));
   console.log(token);
   const { locale, location, direction } = props;
