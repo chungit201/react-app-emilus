@@ -18,6 +18,7 @@ import { getMessageUser, addMessage } from 'api/messageApi';
 import { useParams } from 'react-router-dom';
 import { getDialog } from 'api/dialogApi';
 import io from 'socket.io-client';
+import {sendToOne} from "../../../../api/push-notificationApi";
 const menu = () => (
   <Menu>
     <Menu.Item key="0">
@@ -95,7 +96,15 @@ const Conversation = () => {
       msgType: "text"
     }
     if(msgValue) {
-      setMessage([...message,msgValue])
+      setMessage([...message,msgValue]);
+      const notification = {
+        "title": "Emilus",
+        "body": `Có tin nhắn mới ok ok`,
+        "click_action": "http://localhost:3000/app/apps/chat",
+        "icon": "https://mpng.subpng.com/20191101/szv/transparent-facebook-icon-media-icon-messages-icon-5dbbf5e7d2ae69.969549601572599271863.jpg",
+        "to":"dukPerhynYlgKdtwr3dyxf:APA91bE9wNopQIBAAbKksnGWXcJx3HxQV47ezvmfqh4NnyxGrroC-7weyduAD0n6eq1xAFMBPnEHUU6U2nt2AHDGkT8b8qNcw9glETSdu-OeZHAHcoxYj7r8ezMYTyYPt4K2m9WGkni4"
+      }
+      await sendToOne(notification);
     }
     socket.emit("/client/new_message", msgValue);
   };
