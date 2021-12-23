@@ -87,7 +87,8 @@ const Conversation = () => {
 
   const onSend = async (values) => {
     const user = JSON.parse(localStorage.getItem('user'));
-    const sender = user.id
+    const sender = user.id;
+
     const msgValue = {
       dialogId: id,
       receiver: friend.friend == user.id ? friend.user : friend.friend,
@@ -95,8 +96,8 @@ const Conversation = () => {
       text: values.text,
       msgType: "text"
     }
-    if(msgValue) {
       setMessage([...message,msgValue]);
+
       const notification = {
         "title": "Emilus",
         "body": `Có tin nhắn mới ok ok`,
@@ -105,7 +106,6 @@ const Conversation = () => {
         "to":"dukPerhynYlgKdtwr3dyxf:APA91bE9wNopQIBAAbKksnGWXcJx3HxQV47ezvmfqh4NnyxGrroC-7weyduAD0n6eq1xAFMBPnEHUU6U2nt2AHDGkT8b8qNcw9glETSdu-OeZHAHcoxYj7r8ezMYTyYPt4K2m9WGkni4"
       }
       await sendToOne(notification);
-    }
     socket.emit("/client/new_message", msgValue);
   };
 
@@ -192,7 +192,7 @@ const Conversation = () => {
                 <a href="/#" className="text-dark font-size-lg mr-3">
                   <PaperClipOutlined />
                 </a>
-                <Button shape="circle" type="primary" size="small" onClick={onSend} htmlType="submit">
+                <Button shape="circle" type="primary" size="small"  htmlType="submit">
                   <SendOutlined />
                 </Button>
               </div>
