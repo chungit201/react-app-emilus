@@ -10,7 +10,7 @@ import { APP_PREFIX_PATH, AUTH_PREFIX_PATH } from 'configs/AppConfig'
 import useBodyClass from 'hooks/useBodyClass';
 
 function RouteInterceptor({ children, isAuthenticated, ...rest }) {
-  console.log(isAuthenticated);
+  console.log(rest);
   return (
     <Route
       {...rest}
