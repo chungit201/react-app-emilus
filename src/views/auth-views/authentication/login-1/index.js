@@ -10,7 +10,6 @@ const backgroundStyle = {
 }
 
 const LoginOne = props => {
-
 	const theme = useSelector(state => state.theme.currentTheme)
 	return (
 		<div className="h-100" style={backgroundStyle}>

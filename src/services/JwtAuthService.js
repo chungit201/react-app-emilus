@@ -1,11 +1,15 @@
+import fetch from 'auth/FetchInterceptor'
+
 const JwtAuthService = {}
+
 JwtAuthService.login = function (data) {
-	return fetch('https://server-my-app-0012.herokuapp.com/api/auth/login',{
-		method:"POST",
+	return fetch({
+		url: '/posts',
+		method: 'post',
 		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify(data)
+      'public-request': 'true'
+    },
+		data: data
 	})
 }
 

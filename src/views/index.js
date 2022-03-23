@@ -10,7 +10,6 @@ import { APP_PREFIX_PATH, AUTH_PREFIX_PATH } from 'configs/AppConfig'
 import useBodyClass from 'hooks/useBodyClass';
 
 function RouteInterceptor({ children, isAuthenticated, ...rest }) {
-  console.log(rest);
   return (
     <Route
       {...rest}
@@ -31,10 +30,7 @@ function RouteInterceptor({ children, isAuthenticated, ...rest }) {
 }
 
 export const Views = (props) => {
-  
-  const token = JSON.parse(sessionStorage.getItem('access_token'));
-  console.log(token);
-  const { locale, location, direction } = props;
+  const { locale, token, location, direction } = props;
   const currentAppLocale = AppLocale[locale];
   useBodyClass(`dir-${direction}`);
   return (

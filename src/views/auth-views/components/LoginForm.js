@@ -3,59 +3,48 @@ import { connect } from "react-redux";
 import { Button, Form, Input, Divider, Alert } from "antd";
 import { MailOutlined, LockOutlined } from '@ant-design/icons';
 import PropTypes from 'prop-types';
-import { useHistory } from "react-router-dom";
 import { GoogleSVG, FacebookSVG } from 'assets/svg/icon';
-import CustomIcon from 'components/util-components/CustomIcon';
-import JwtAuthService from '../../../services/JwtAuthService';
-import {
-	signIn,
-	showLoading,
-	showAuthMessage,
-	hideAuthMessage,
-	signInWithGoogle,
-	signInWithFacebook
+import CustomIcon from 'components/util-components/CustomIcon'
+import { 
+	signIn, 
+	showLoading, 
+	showAuthMessage, 
+	hideAuthMessage, 
+	signInWithGoogle, 
+	signInWithFacebook 
 } from 'redux/actions/Auth';
+import { useHistory } from "react-router-dom";
 import { motion } from "framer-motion"
 
 export const LoginForm = props => {
-	const {
-		otherSignIn,
-		showForgetPassword,
+	let history = useHistory();
+
+	const { 
+		otherSignIn, 
+		showForgetPassword, 
 		hideAuthMessage,
 		onForgetPasswordClick,
 		showLoading,
 		signInWithGoogle,
 		signInWithFacebook,
-		extra,
-		signIn,
-		token,
+		extra, 
+		signIn, 
+		token, 
 		loading,
 		redirect,
 		showMessage,
 		message,
 		allowRedirect
 	} = props
-	const history = useHistory();
 
 	const initialCredential = {
-		email: 'chungvuong001@gmail.com',
-		password: '123456789a'
+		email: 'user1@themenate.net',
+		password: '2005ipo'
 	}
 
 	const onLogin = values => {
 		showLoading()
-		JwtAuthService.login(values)
-		.then(res=>res.json())
-		.then(data=>{
-			const {tokens,user} = data
-			sessionStorage.setItem('access_token',JSON.stringify(tokens.access.token));
-			localStorage.setItem('user',JSON.stringify(user));
-			if(tokens){
-				history.replace({
-					pathname:"/app/dashboards/default"
-				})
-			}
-		})
+		signIn(values);
 	};
 
 	const onGoogleLogin = () => {
@@ -72,31 +61,31 @@ export const LoginForm = props => {
 		if (token !== null && allowRedirect) {
 			history.push(redirect)
 		}
-		if (showMessage) {
+		if(showMessage) {
 			setTimeout(() => {
 				hideAuthMessage();
 			}, 3000);
 		}
 	});
-
+	
 	const renderOtherSignIn = (
 		<div>
 			<Divider>
 				<span className="text-muted font-size-base font-weight-normal">or connect with</span>
 			</Divider>
 			<div className="d-flex justify-content-center">
-				<Button
-					onClick={() => onGoogleLogin()}
-					className="mr-2"
-					disabled={loading}
-					icon={<CustomIcon svg={GoogleSVG} />}
+				<Button 
+					onClick={() => onGoogleLogin()} 
+					className="mr-2" 
+					disabled={loading} 
+					icon={<CustomIcon svg={GoogleSVG}/>}
 				>
 					Google
 				</Button>
-				<Button
-					onClick={() => onFacebookLogin()}
-					icon={<CustomIcon svg={FacebookSVG} />}
-					disabled={loading}
+				<Button 
+					onClick={() => onFacebookLogin()} 
+					icon={<CustomIcon svg={FacebookSVG}/>}
+					disabled={loading} 
 				>
 					Facebook
 				</Button>
@@ -106,56 +95,59 @@ export const LoginForm = props => {
 
 	return (
 		<>
-			<motion.div
-				initial={{ opacity: 0, marginBottom: 0 }}
-				animate={{
+			<motion.div 
+				initial={{ opacity: 0, marginBottom: 0 }} 
+				animate={{ 
 					opacity: showMessage ? 1 : 0,
-					marginBottom: showMessage ? 20 : 0
-				}}>
+					marginBottom: showMessage ? 20 : 0 
+				}}> 
 				<Alert type="error" showIcon message={message}></Alert>
 			</motion.div>
-			<Form
-				layout="vertical"
-				name="login-form"
+			<Form 
+				layout="vertical" 
+				name="login-form" 
 				initialValues={initialCredential}
 				onFinish={onLogin}
 			>
-				<Form.Item
-					name="email"
-					label="Email"
+				<Form.Item 
+					name="email" 
+					label="Email" 
 					rules={[
-						{
+						{ 
 							required: true,
-							message: 'Please input your username',
+							message: 'Please input your email',
 						},
-
+						{ 
+							type: 'email',
+							message: 'Please enter a validate email!'
+						}
 					]}>
-					<Input prefix={<MailOutlined className="text-primary" />} />
+					<Input prefix={<MailOutlined className="text-primary" />}/>
 				</Form.Item>
-				<Form.Item
-					name="password"
+				<Form.Item 
+					name="password" 
 					label={
-						<div className={`${showForgetPassword ? 'd-flex justify-content-between w-100 align-items-center' : ''}`}>
+						<div className={`${showForgetPassword? 'd-flex justify-content-between w-100 align-items-center' : ''}`}>
 							<span>Password</span>
 							{
-								showForgetPassword &&
-								<span
-									onClick={() => onForgetPasswordClick}
+								showForgetPassword && 
+								<span 
+									onClick={() => onForgetPasswordClick} 
 									className="cursor-pointer font-size-sm font-weight-normal text-muted"
 								>
 									Forget Password?
 								</span>
-							}
+							} 
 						</div>
-					}
+					} 
 					rules={[
-						{
+						{ 
 							required: true,
 							message: 'Please input your password',
 						}
 					]}
 				>
-					<Input.Password prefix={<LockOutlined className="text-primary" />} />
+					<Input.Password prefix={<LockOutlined className="text-primary" />}/>
 				</Form.Item>
 				<Form.Item>
 					<Button type="primary" htmlType="submit" block loading={loading}>
@@ -165,7 +157,7 @@ export const LoginForm = props => {
 				{
 					otherSignIn ? renderOtherSignIn : null
 				}
-				{extra}
+				{ extra }
 			</Form>
 		</>
 	)
@@ -185,9 +177,9 @@ LoginForm.defaultProps = {
 	showForgetPassword: false
 };
 
-const mapStateToProps = ({ auth }) => {
-	const { loading, message, showMessage, token, redirect } = auth;
-	return { loading, message, showMessage, token, redirect }
+const mapStateToProps = ({auth}) => {
+	const {loading, message, showMessage, token, redirect} = auth;
+  return {loading, message, showMessage, token, redirect}
 }
 
 const mapDispatchToProps = {

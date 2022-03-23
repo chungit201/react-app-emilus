@@ -36,20 +36,14 @@ const menuItem = [
 ]
 
 export const NavProfile = ({signOut}) => {
-  const user = JSON.parse(localStorage.getItem('user'))
-  const LogOut = () =>{
-      sessionStorage.clear();
-      localStorage.clear();
-      window.location.reload();
-  }
   const profileImg = "/img/avatars/thumb-1.jpg";
   const profileMenu = (
     <div className="nav-profile nav-dropdown">
       <div className="nav-profile-header">
         <div className="d-flex">
-          <Avatar size={45} src={user.avatar} />
+          <Avatar size={45} src={profileImg} />
           <div className="pl-3">
-            <h4 className="mb-0">{user.name}</h4>
+            <h4 className="mb-0">Charlie Howard</h4>
             <span className="text-muted">Frontend Developer</span>
           </div>
         </div>
@@ -66,7 +60,7 @@ export const NavProfile = ({signOut}) => {
               </Menu.Item>
             );
           })}
-          <Menu.Item key={menuItem.length + 1} onClick={e => LogOut()}>
+          <Menu.Item key={menuItem.length + 1} onClick={e => signOut()}>
             <span>
               <LogoutOutlined className="mr-3"/>
               <span className="font-weight-normal">Sign Out</span>
@@ -80,7 +74,7 @@ export const NavProfile = ({signOut}) => {
     <Dropdown placement="bottomRight" overlay={profileMenu} trigger={["click"]}>
       <Menu className="d-flex align-item-center" mode="horizontal">
         <Menu.Item key="profile">
-          <Avatar src={user.avatar} />
+          <Avatar src={profileImg} />
         </Menu.Item>
       </Menu>
     </Dropdown>
